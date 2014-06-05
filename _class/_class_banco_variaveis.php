@@ -4,7 +4,26 @@ class banco_variavel
 	var $tabela = 'variaveis';
 	var $tabela_dados = 'dados';
 	
-	function exportar_lista($var)
+	function lista_variaveis()
+		{
+			$sql = "select * from ".$this->tabela."
+					where v_ativo = 1 
+					order by v_variavel ";
+			$rlt = db_query($sql);
+			$sx = '<Table width="!00%">';
+			$sx .= '<TR><TH>Variável<TH>Descrição';
+			while ($line = db_read($rlt))
+				{
+					$link = '<A HREF="'.page().'?varid='.trim($line['v_variavel']).'">';
+					$sx .= '<TR>';
+					$sx .= '<TD>'.$link.$line['v_variavel'].'</A>';
+					$sx .= '<TD>'.$line['v_nome'];
+				}
+			$sx .= '</table>';
+			return($sx);
+		}
+	
+	function exportar_lista($var,$fmt='CVS')
 		{
 			$codigo = $this->recupera_codigo($var);
 			$sql = "select * from ".$this->tabela_dados." 
@@ -13,7 +32,66 @@ class banco_variavel
 					where v_codigo = '$codigo' 
 					order by d_fld1, d_fld2
 					";
-			echo $sql;
+			$rlt = db_query($sql);
+			$sh = '';
+			$ok = array(0,0,0,0,0,0,0,0,0,0);
+			$fmt = 'XLS';
+			switch ($fmt)
+				{
+				case 'CVS':
+						$as = '""';
+						$suf = '';
+						$pre = '';
+						$sep = ',';
+					break;
+				case 'XML':
+						$suf = '<TR>';
+						$pre = '<TD>';
+						$sep = '</TD>';	
+						$fim = '</tr>';				
+					break;
+				case 'XLS':
+						$as = '';
+						$sta = '<table>';
+						$suf = '<TR>';
+						$pre = '<TD>';
+						$sep = '</TD>';	
+						$fim = '</tr>';	
+						$sto = '</table>';					
+					break;	
+				case 'HTML':
+						$suf = '<TR>';
+						$pre = '<TD>';
+						$sep = '</TD>';	
+						$fim = '</tr>';					
+					break;					
+				}
+			while ($line = db_read($rlt))
+				{
+					if (strlen($sh) == 0)
+						{
+							$sh .= $suf;
+							$sh .= $pre.trim($line['v_col_01']).'/'.trim($line['v_col_02']).$sep;
+							$sh .= $pre.'varid'.$sep;
+							$sh .= $pre.trim($line['v_col_03']).$sep;
+							$sh .= $pre.trim($line['v_col_04']).$sep;
+							$sh .= $pre.trim($line['v_col_05']).$sep;
+							$sh .= $pre.trim($line['v_col_06']);
+							$sh .= chr(10).chr(13);
+						}
+					$sx .= $suf;
+					$sx .= $pre.$as.trim($line['d_fld1']);
+							if (strlen($line['d_fld2']) > 0) { $sx .='/'.trim($line['d_fld2']).$as; }
+					$sx .= $sep;
+					$sx .= $pre.$as.trim($line['v_variavel']).$as.$sep;
+					$sx .= $pre.$as.trim($line['d_fld3']).$as.$sep;
+					$sx .= $pre.trim($line['d_fld4']).$sep;
+					$sx .= $pre.trim($line['d_fld5']).$sep;
+					$sx .= $pre.trim($line['d_fld6']).$fim;
+					$sx .= chr(13).chr(10);
+				}
+			$sx = $sta.$sh.$sx.$sto;
+			return($sx);
 		}
 	
 	function alimenta_lista($var,$vals=array())
@@ -89,19 +167,7 @@ class banco_variavel
 					return('');
 				}
 		}
-	function lista_variaveis()
-		{
-			$sql = "select * from ".$this->tabela." 
-						where v_ativo = 1
-					order by v_variavel
-			";
-			$rlt = db_query($sql);
-			
-			while ($line = db_read($rlt))
-				{
-					$sx = $this->mostra_variavel($line);
-				}
-		}	
+	
 	function mostra_variavel($line)
 		{
 			$sx = '<TR>';
