@@ -3,6 +3,23 @@ class instituicao
 	{
 		var $tabela = 'instituicao';
 		
+		function prioriza($id)
+			{
+				$sql = "update  ".$this->tabela." set inst_ordem = 1 where inst_codigo = '$id' ";
+				$rlt = db_query($sql);				
+			}
+		
+		function le($id)
+			{
+				$sql = "select * from ".$this->tabela." where inst_codigo = '$id' ";
+				$rlt = db_query($sql);
+				if ($line = db_read($rlt))
+					{
+						$this->nome = trim($line['inst_nome']);
+						$this->line = $line;
+					}
+			}
+		
 		function insere_instituicao($name,$sigla)
 			{
 				$name = trim($name);
@@ -14,7 +31,7 @@ class instituicao
 					values
 					('$name','$nome_asc','$sigla',
 					'','','',
-					'',1)
+					'',99)
 				";
 				$rlt = db_query($sql);
 				
@@ -57,7 +74,7 @@ class instituicao
 				array_push($cp,array('$S100','inst_nome','Nome da Instituição',True,True));
 				array_push($cp,array('$H8','inst_nome_asc','',True,True));
 				array_push($cp,array('$S100','inst_abreviatura','Sigla',True,True));
-				array_push($cp,array('$[1-9]','inst_ordem','Ordem',True,True));
+				array_push($cp,array('$[1-99]','inst_ordem','Ordem',True,True));
 				return($cp);				
 			}
 		function updatex()
@@ -92,7 +109,9 @@ class instituicao
   					inst_cidade char(7),
   					inst_endereco text,
   					inst_site char(100),
-  					inst_ordem int2 default 0
+  					inst_uf char(2),
+  					inst_regiao char(2),
+  					inst_ordem int2 default 99
 					)';
 				$rlt = db_query($sql);
 		} 

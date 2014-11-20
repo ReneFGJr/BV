@@ -6,7 +6,6 @@ class cnpq_editais_areas {
 		$sql = "select * from " . $this -> tabela . " where 
 					ieda_descricao = '$id'
 			";
-			echo $sql;
 		$rlt = db_query($sql);
 		if ($line = db_read($rlt)) {
 			return ($line['ieda_codigo']);
@@ -16,8 +15,6 @@ class cnpq_editais_areas {
 						values
 						('','$id',1)
 					";
-					echo $sql;
-			echo '<hr>' . $sql;
 			$rlt = db_query($xsql);
 			$this -> updatex();
 			$rlt = db_query($sql);
@@ -32,7 +29,6 @@ class cnpq_editais_areas {
 		$c2 = $c . '_codigo';
 		$c3 = 5;
 		$sql = "update " . $this -> tabela . " set $c2 = lpad($c1,$c3,0) where $c2='' ";
-		echo $sql;
 		$rlt = db_query($sql);
 	}
 

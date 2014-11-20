@@ -10,8 +10,10 @@
  */
 
 class header {
-	var $charcod = "UTF-8";
-	/* var $charcod = "ISO-8859-1"; */
+	//var $charcod = "UTF-8";
+	var $charcod = "ISO-8859-1";
+	
+	var $cab_content;
 
 	/* Google Ids */
 	var $google_id = '';
@@ -97,6 +99,7 @@ class header {
 		$sx = $this -> head();
 		$sx .= $this -> api_google;
 		$sx .= '<div id="cab">';
+		$sx .= $this->cab_content;
 		$sx .= $this->menu_top();
 		$sx .= '</div>';
 		
@@ -106,7 +109,7 @@ class header {
 
 	function menu_top()
 		{
-			return('xx');
+			return('');
 		}
 
 	function retornar_para_pagina_principal() {

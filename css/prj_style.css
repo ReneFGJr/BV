@@ -10,11 +10,11 @@ body
 #content
     {
         position: absolute;
-        min-width: 900px;
-        left: -450px;
+        min-width: 1100px;
+        left: -550px;
         margin-left: 50%;
         min-height: 800px;
-        border: 1px solid #313131;
+        border: 0px solid #313131;
         background-color: #FFFFFF;
         padding: 20px;
     }    
@@ -28,12 +28,27 @@ body
 #foot
     {
         font-family: "CICPG", Arial, Tahoma;
-        padding: 20px 0px 0px 0px;
-        background-color:#D0D0D0;
-        width: 100%;
-        height: 30px;
+        padding: 10px 0px 0px 0px;
+        background-color:#FEFEFE;
+        width: 220px;
+        height: 20px;
         position:absolute;                  /* added */
         bottom:0;                           /* added */
         left:0;                             /* added */  
-        text-align: center;   
+        text-align: center;
     }
+    
+ .link_cab
+    {
+        text-decoration: none;
+        color: #EEEEEE;
+        font-size: 15px;
+        opacity: 0.9; 
+        padding: 15px;      
+    }
+.link_cab:hover
+    {
+        opacity: 1;
+    }    
+    
+  
