@@ -8,7 +8,7 @@ $html = '<div id="home">
 	<A href="index.php" class="link_cab">
 	<img src="img/icone_home_white.png" height="20"> HOME</A>
 	&nbsp;;
-	<A href="indicador_captacao.php" class="link_cab">
+	<A href="indicador.php" class="link_cab">
 	<img src="img/icone_pie_white.png" height="20"> INDICADORES</A>
 	</div>';
 $hd->cab_content = $html;
