@@ -3,6 +3,7 @@ require("db.php");
 require("_class/_class_header.php");
 $hd = new header;
 require("_class/_class_message.php");
+require($include.'sisdoc_debug.php');
 
 $html = '<div id="home">
 	<A href="index.php" class="link_cab">

@@ -23,6 +23,11 @@ if (count($dir) > 0) {
 	echo '<HR>'.$file;
 	if (file_exists($file)) 
 		{ echo ' <font color="green">File exists</font>'; }
+	else
+		{
+			echo '<font color="red">Error open file '.$file.'</font>';
+			exit;
+		}
 	echo '<HR>';
 	$xml = simplexml_load_file($file);
 

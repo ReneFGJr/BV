@@ -134,7 +134,19 @@ class cnpq_editais {
   			ied_ativo int(11) NOT NULL,
   			ied_ano char(4) NOT NULL,
   			ied_valor_concessao float,
+  			ied_tipo char(20)
 			) ";
+		$rlt = db_query($sql);
+		
+		$sql = "
+			CREATE TABLE icip_editais_autores (
+			id_iea bigint(20) unsigned NOT NULL,
+  			iea_autor char(7) NOT NULL,
+  			iea_edital char(5) NOT NULL,
+  			iea_comite char(5) NOT NULL,
+  			iea_instituicao char(7) NOT NULL
+			)
+		";
 		$rlt = db_query($sql);
 
 	}
