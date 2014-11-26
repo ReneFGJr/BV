@@ -1,5 +1,14 @@
 <?php
-require ("cab.php");
+$type = $_GET['dd90'];
+
+if ($type == 'XLS')
+	{
+		require ("indicador_grupos_cnpq_excel.php");
+		exit;
+	} else {
+		require ("cab.php");		
+	}
+
 
 echo $hd -> hr('Indicador de captação / Editais CNPq');
 
@@ -28,11 +37,14 @@ if (strlen($dd[1]) > 0) {
 	$jsh = $cnpq -> projetos_por_instituicao($dd[1],$dd[2]);
 }
 
+$param = 'dd90=XLS&dd1='.$dd[1].'&dd2='.$dd[2].'&dd3='.$dd[3].'&dd4='.$dd[4];
+
 ?>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
 <div id="container" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+<a href="indicador_captacao_cnpq.php?<?php echo $param;?>" class="lt0">exportar dados para o excel</A>
 
 <script>
 	$(function() {

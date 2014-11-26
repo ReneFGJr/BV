@@ -32,9 +32,9 @@ body
         background-color:#FEFEFE;
         width: 220px;
         height: 20px;
-        position:absolute;                  /* added */
+        position: fixed;                  /* added */
         bottom:0;                           /* added */
-        left:0;                             /* added */  
+        right: 0;                             /* added */  
         text-align: center;
     }
     
@@ -52,3 +52,19 @@ body
     }    
     
   
+.lt0
+	{
+		font-size: 11px;
+		text-decoration: none;
+	}
+
+a.lt0
+	{
+		color: blue;
+		text-decoration: none;
+	}
+a.lt0:hover
+	{
+		color: blue;
+		text-decoration: underline;
+	}
