@@ -14,10 +14,7 @@ $html = '<div id="home">
 $hd->cab_content = $html;
 
 echo $hd->head();
-echo $hd->cab();
-
-require($include.'sisdoc_menus.php');
-
+echo $hd->cab('PROTO');
 
 ?>
 
